@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define l long int
+int main(){
+     l N, X, i, U, V, Q, cnt = 0;
+     cin>>N;
+     l A[N], edges[N+1][N+1] = {{0},{0}};
+     char color[N+1];
+     memset(color, 'N', sizeof(color));
+     for(i = 0; i < N-1 ; i++)
+     {
+         cin>>U>>V;
+         edges[U][V] = 1;
+         edges[V][U] = 1;
+     }
+     for(i = 1; i <= N; i++)
+     cin>>A[i];
+     cin>>Q;
+     while(Q--)
+     {
+        cin>>X;
+        if(color[X] == 'Y')
+        { 
+        cout<<cnt<<endl;
+        continue;
+        }
+        else
+        cnt++;
+        for(i = 1; i <= N; i++)
+        {
+            
+            if(edges[X][i] == 1 && A[X] == A[i] && color[X] == 'N')
+            {    
+                color[X] = color[i] = 'Y';
+               cnt++;
+            }
+        }
+         cout<<cnt<<endl;
+     }
+    
+return 0;
+}
