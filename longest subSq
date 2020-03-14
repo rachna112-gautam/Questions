@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+int mx = 0;
+bool adjChar(string output)
+{
+   bool flag = 0;
+   int i;
+   if(output.length() == 1)
+   return true;
+   if(output.length() == 2)
+   {
+       if(output[1]!=output[0])
+       return true;
+       
+   }
+   else{
+    i = 1;
+    while(output[i]!='\0'){
+        if(output[i-1] != output[i] && output[i] != output[i+1])
+        {
+            flag = 1;
+        }
+        i += 2;
+    }
+   }
+    if(flag)
+    return true;
+    else
+    return false;
+}
+void SUbseq(string input, string output){
+    if(input.length() == 0)
+    {   
+       if(adjChar(output))
+       {
+           if(mx < output.length())
+           mx = output.length();
+       }
+        return;
+    }
+    SUbseq(input.substr(1), output);
+    SUbseq(input.substr(1), output+input[0]);
+}
+
+int main(){
+    int tc;
+    cin>>tc;
+    while(tc--){
+        string s;
+        int n;
+        cin>>n;
+        cin>>s;
+        mx = 0;
+        SUbseq(s, "");
+        cout<<mx<<endl;
+    }
+return 0;
+}
