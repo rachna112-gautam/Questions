@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+void swap(char *a, char *b){
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void genPermutation(string s, int start, int end){
+    if(start == end){
+        cout<<s<<" ";
+    }
+    else
+    {
+        for(int i = start; i < end; i++){
+            swap(&s[start],&s[i]);
+            genPermutation(s, start + 1, end);
+            swap(&s[i],& s[start]);
+        }
+    }
+}
+int main(){
+    string s;
+    cin>>s;
+    int len = s.length();
+    genPermutation(s, 0, len);
+return 0;
+}
